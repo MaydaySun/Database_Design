@@ -159,9 +159,9 @@ values ('10231106003', '王鑫', '男', 32, current_timestamp, '杭州', 'xxxxxx
 insert into employee
 values ('10231106004', '王倩', '女', 35, current_timestamp, '南京', 'xxxxxxxxxxx', 'example@xx.com', 9);
 insert into employee
-values ('10231106005', '卢潇', '男', 27, current_timestamp, '深圳', 'xxxxxxxxxxx', 'example@xx.com', 5);
+values ('10231106005', '卢潇', '男', 27, current_timestamp, '深圳', 'xxxxxxxxxxx', 'example@xx.com', 10);
 insert into employee
-values ('10231106138', '宋雪', '男', 25, current_timestamp, '北京', 'xxxxxxxxxxx', 'example@xx.com', 8);
+values ('10231106138', '宋雪', '女', 25, current_timestamp, '北京', 'xxxxxxxxxxx', 'example@xx.com', 8);
 insert into employee
 values ('10231106124', '蒋玥', '女', 29, current_timestamp, '西安', 'xxxxxxxxxxx', 'example@xx.com', 10);
 
@@ -173,7 +173,7 @@ values ('102311061124', '蒋玥', current_timestamp);
 insert into manager
 values ('10231106004', '王倩', 9);
 insert into manager
-values ('10231106005', '卢潇', 5);
+values ('10231106005', '卢潇', 10);
 
 insert into course
 values ('35142', '数据库设计', '开发', 'xxxxxxx', '10231106124');
