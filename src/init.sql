@@ -25,6 +25,8 @@ create table employee
 ) DEFAULT CHARSET = utf8;
 ALTER TABLE employee
     CONVERT TO CHARACTER SET utf8; -- 修改字段编码为UTF8，防止中文乱码
+create index 'employee_dept_id_index' on employee (department_id); -- 为department_id创建索引
+create index 'employee_name_index' on employee (name); -- 为name创建索引
 
 create table manager
 (
@@ -40,6 +42,7 @@ create table manager
 );
 ALTER TABLE manager
     CONVERT TO CHARACTER SET utf8;
+create index 'manager_dept_id_index' on manager (department_id); -- 为department_id创建索引
 
 create table instructor
 (
