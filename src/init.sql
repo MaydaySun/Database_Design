@@ -19,7 +19,7 @@ create table employee
     city            varchar(4),
     phone_number    numeric(11, 0),
     email           varchar(50),
-    department_id   int, -- 部门可以为null，一个新录入员工可能没有分配部门
+    department_id   int, -- 部门可以为null，一个新录入员工可能还没有分配部门
     primary key (id),
     foreign key (department_id) references department (department_id)
 ) DEFAULT CHARSET = utf8;
@@ -67,7 +67,7 @@ create table course
 (
     course_id       varchar(7)      not null,
     title           varchar(20)     not null, -- 课程编号和名称不能为空
-    type            int, -- 课程类型，实际上就是哪个部门必修
+    type            varchar(10)      default '尚无分类', -- 课程类型
     content         varchar(50)     default '尚无描述',
     instructor_id   varchar(11)     not null, -- 一门课只有一个教员教授，以instructor_id作为course的属性即可
     primary key (course_id),
@@ -77,12 +77,12 @@ create table course
 ALTER TABLE course
     CONVERT TO CHARACTER SET utf8;
 
-create table test_record
+create table test_record -- 单次测试的记录
 (
     record_id       bigint          not null    auto_increment, -- 测试记录可能会很多，使用bigint
     course_id       varchar(7)      not null,
     employee_id     varchar(11)     not null,
-    score           int             not null    check ( score >= 0 and score <= 100 ),
+    score           int             not null    check ( score >= 0 and score <= 100 ), -- 当某次测试的score达到60需要更新takes表中对应记录为已通过
     PRIMARY KEY (record_id)
 ) DEFAULT CHARSET = utf8;
 ALTER TABLE test_record
@@ -114,7 +114,7 @@ create table takes
 ALTER TABLE takes
     CONVERT TO CHARACTER SET utf8;
 
-create table course_to_dept -- 课程与部门的关联表，表示该课程对此部门可见
+create table course_to_dept -- 课程与部门的关联表，表示该课程是此部门的必修课
 (
     course_id       varchar(7)      not null,
     department_id   int             not null,
@@ -162,8 +162,30 @@ values ('10231106138', '宋雪', '男', 25, current_timestamp, '北京', 'xxxxxx
 insert into employee
 values ('10231106124', '蒋玥', '女', 29, current_timestamp, '西安', 'xxxxxxxxxxx', 'example@xx.com', 10);
 
-# insert into course
-# values ('35142', '数据库设计', '10231106124', 10);
+insert into instructor
+values ('102311061138', '宋雪', current_timestamp);
+insert into instructor
+values ('102311061124', '蒋玥', current_timestamp);
+
+insert into manager
+values ('10231106004', '王倩', 9);
+insert into manager
+values ('10231106005', '卢潇', 5);
+
+insert into course
+values ('35142', '数据库设计', '开发', 'xxxxxxx', '10231106124');
+insert into course
+values ('35155', '软件测试', '测试', 'xxxxxxx', '102311061138');
+
+insert into course_to_dept
+values ('35142', 10);
+insert into course_to_dept
+values ('35155', 8);
+
+insert into takes -- 根据必修课程初始化takes表
+values('10231106002', '35155', 0, null);
+insert into takes
+values('10231106003', '35142', 0, null);
 
 # token: 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
 
