@@ -187,5 +187,4 @@ values('10231106002', '35155', 0, null);
 insert into takes
 values('10231106003', '35142', 0, null);
 
-# token: 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
 
