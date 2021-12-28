@@ -165,5 +165,5 @@ values ('10231106124', '蒋玥', '女', 29, current_timestamp, '西安', 'xxxxxx
 # insert into course
 # values ('35142', '数据库设计', '10231106124', 10);
 
-# token: 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
+# token: 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
 
