@@ -48,7 +48,11 @@ public class InstructorCommand {
                         String cid = param.getCid();
                         String id = param.getUid();
                         Long score = Long.parseLong(param.getScore());
-                        instructorMapper.addGrade(cid, id, score);
+                        instructorMapper.setCompleted(cid, id);
+                        instructorMapper.addTestRecord(cid, id, score);
+                        if (score >= 60){
+                            instructorMapper.setPassed(id, cid);
+                        }
                         logMapper.addLog(instructor.getEmployeeId(), "add grade " + cid + " "
                                 + id + " " + score);
                         sqlSession.commit();

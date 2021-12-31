@@ -58,9 +58,9 @@ ALTER TABLE manager
 
 create table instructor
 (
-    employee_id     varchar(11)     not null,
-    name            varchar(10)     not null,
-    date_registered TIMESTAMP   default current_timestamp,
+    employee_id         varchar(11)     not null,
+    name                varchar(10)     not null,
+    date_registered     TIMESTAMP       default current_timestamp,
     primary key (employee_id),
     foreign key (employee_id) references employee (id)
         on delete cascade
@@ -103,9 +103,9 @@ ALTER TABLE test_record
 
 create table log
 (
-    log_id          bigint             auto_increment,
+    log_id          bigint          auto_increment,
     employee_id     varchar(10)     default 'admin', -- 操作者的id，若不是员工操作，默认值为admin操作
-    content         varchar(100)     not null,
+    content         varchar(100)    not null,
     time            TIMESTAMP       default current_timestamp, -- 日志时间戳
     primary key (log_id)
 ) DEFAULT CHARSET = utf8;

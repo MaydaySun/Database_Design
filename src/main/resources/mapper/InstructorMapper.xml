@@ -15,7 +15,15 @@
                                         and takes.course_id = course.course_id;
     </select>
 
-    <insert id="addGrade">
+    <update id="setCompleted">
+        update takes set completed = 1 where employee_id = #{id} and course_id = #{cid};
+    </update>
+
+    <update id="setPassed">
+        update takes set is_passed = 1 where employee_id = #{id} and course_id = #{cid};
+    </update>
+
+    <insert id="addTestRecord">
        insert into test_record(course_id, employee_id, score)
                     values (#{cid}, #{id}, #{score});
     </insert>

@@ -10,6 +10,8 @@ import java.util.List;
 public interface InstructorMapper {
     public Instructor getInstructor(@Param("iid")String iid) throws SQLException;
     public List<Takes> getStudents(@Param("iid")String iid) throws SQLException;
-    public int addGrade( @Param("cid")String cid, @Param("id")String id, @Param("score")Long score) throws SQLException;
+    public int setCompleted(@Param("id")String id, @Param("cid")String cid) throws SQLException;
+    public int setPassed(@Param("id")String id, @Param("cid")String cid) throws SQLException;
+    public int addTestRecord( @Param("cid")String cid, @Param("id")String id, @Param("score")Long score) throws SQLException;
     public int associateCourse(@Param("cid")String cid, @Param("did")String did, @Param("required")String required) throws SQLException;
 }
