@@ -43,6 +43,7 @@ public class AdminCommand {
                         String id = param.getUid();
                         String name = param.getName();
                         adminMapper.updateEmployee(id, name);
+                        adminMapper.addLog("update employee name of " + id + ": " + name);
                         sqlSession.commit();
                         sqlSession.close();
                         System.out.println("Finished!");
@@ -54,6 +55,7 @@ public class AdminCommand {
                         String name = param.getName();
                         String did = param.getDid();
                         adminMapper.addEmployee(id, name, did);
+                        adminMapper.addLog("add employee " + id + " " + name);
                         sqlSession.commit();
                         sqlSession.close();
                         System.out.println("Finished!");
@@ -63,6 +65,7 @@ public class AdminCommand {
                     case "deleteEmployee":{
                         String id = param.getUid();
                         adminMapper.deleteCourse(id);
+                        adminMapper.addLog("delete employee " + id);
                         sqlSession.commit();
                         sqlSession.close();
                         System.out.println("Finished!");
@@ -81,6 +84,7 @@ public class AdminCommand {
                         String cid = param.getCid();
                         String title = param.getTitle();
                         adminMapper.updateCourse(cid, title);
+                        adminMapper.addLog("update course title of " + cid + ": " + title);
                         sqlSession.commit();
                         sqlSession.close();
                         System.out.println("Finished!");
@@ -92,6 +96,7 @@ public class AdminCommand {
                         String title = param.getTitle();
                         String iid = param.getIid();
                         adminMapper.addCourse(cid, title, iid);
+                        adminMapper.addLog("add course " + cid + " " + title);
                         sqlSession.commit();
                         sqlSession.close();
                         System.out.println("Finished!");
@@ -101,6 +106,7 @@ public class AdminCommand {
                     case "deleteCourse":{
                         String cid = param.getCid();
                         adminMapper.deleteCourse(cid);
+                        adminMapper.addLog("delete course " + cid);
                         sqlSession.commit();
                         sqlSession.close();
                         System.out.println("Finished!");

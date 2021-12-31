@@ -1,6 +1,7 @@
 package com.db_project.commands;
 
 import com.db_project.dao.InstructorMapper;
+import com.db_project.dao.LogMapper;
 import com.db_project.main.ArgNotFoundException;
 import com.db_project.main.Param;
 import com.db_project.model.Instructor;
@@ -29,6 +30,7 @@ public class InstructorCommand {
             parser.parseArgument(args);
             SqlSession sqlSession = MybatisUtils.getSqlSession();
             InstructorMapper instructorMapper = sqlSession.getMapper(InstructorMapper.class);
+            LogMapper logMapper = sqlSession.getMapper(LogMapper.class);
             try {
                 switch (args[0]){
                     case "getStudents":{
@@ -47,6 +49,8 @@ public class InstructorCommand {
                         String id = param.getUid();
                         Long score = Long.parseLong(param.getScore());
                         instructorMapper.addGrade(cid, id, score);
+                        logMapper.addLog(instructor.getEmployeeId(), "add grade " + cid + " "
+                                + id + " " + score);
                         sqlSession.commit();
                         sqlSession.close();
                         System.out.println("Finished!");
@@ -59,6 +63,8 @@ public class InstructorCommand {
                         String did = param.getDid();
                         String required = "1".equals(param.getRequired()) ? "必修" : "选修";
                         instructorMapper.associateCourse(cid, did, required);
+                        logMapper.addLog(instructor.getEmployeeId(), "associate course and department "
+                                + cid + " " + did + " " + required);
                         sqlSession.commit();
                         sqlSession.close();
                         System.out.println("Finished!");

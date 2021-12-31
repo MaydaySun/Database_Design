@@ -105,7 +105,7 @@ create table log
 (
     log_id          int             auto_increment,
     employee_id     varchar(10)     default 'admin', -- 操作者的id，若不是员工操作，默认值为admin操作
-    content         varchar(30)     not null,
+    content         varchar(100)     not null,
     time            TIMESTAMP       default current_timestamp, -- 日志时间戳
     primary key (log_id)
 ) DEFAULT CHARSET = utf8;
