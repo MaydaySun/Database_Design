@@ -90,7 +90,13 @@ create table test_record -- 单次测试的记录
     course_id       varchar(7)      not null,
     employee_id     varchar(11)     not null,
     score           int             not null    check ( score >= 0 and score <= 100 ), -- 当某次测试的score达到60需要更新takes表中对应记录为已通过
-    PRIMARY KEY (record_id)
+    primary key (record_id),
+    foreign key (course_id) references course (course_id)
+        on delete cascade
+        on update cascade,
+    foreign key (employee_id) references employee (id)
+        on delete cascade
+        on update cascade
 ) DEFAULT CHARSET = utf8;
 ALTER TABLE test_record
     CONVERT TO CHARACTER SET utf8;
