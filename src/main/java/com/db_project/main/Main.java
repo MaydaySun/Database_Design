@@ -5,6 +5,7 @@ import com.db_project.commands.EmployeeCommand;
 import com.db_project.commands.InstructorCommand;
 import com.db_project.commands.ManagerCommand;
 import com.db_project.dao.EmployeeMapper;
+import com.db_project.model.Employee;
 import com.db_project.utils.MybatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.kohsuke.args4j.CmdLineException;

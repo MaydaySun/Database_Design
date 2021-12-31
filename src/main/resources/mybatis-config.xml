@@ -7,6 +7,7 @@
         <!--<typeAlias type="com.db_project.model.User" alias="user"/>-->
         <!-- 自动扫描model包下的全部类-->
         <package name="com.db_project.model"/>
+        <package name="com.db_project.dao"/>
     </typeAliases>
     <environments default="development">
         <environment id="development">
