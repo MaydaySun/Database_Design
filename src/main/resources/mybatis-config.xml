@@ -3,6 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <typeAliases>
+        <!--<typeAlias type="com.db_project.model.User" alias="user"/>-->
+        <!-- 自动扫描model包下的全部类-->
+        <package name="com.db_project.model"/>
+    </typeAliases>
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
