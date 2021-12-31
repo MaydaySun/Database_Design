@@ -1,9 +1,7 @@
 package com.db_project.model;
 
 
-import java.io.Serializable;
-
-public class Course implements Serializable {
+public class Course {
 
   private String courseId;
   private String title;

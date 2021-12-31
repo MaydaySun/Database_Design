@@ -1,9 +1,7 @@
 package com.db_project.model;
 
 
-import java.io.Serializable;
-
-public class TestRecord implements Serializable {
+public class TestRecord {
 
   private long recordId;
   private String courseId;

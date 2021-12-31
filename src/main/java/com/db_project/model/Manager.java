@@ -1,13 +1,11 @@
 package com.db_project.model;
 
 
-import java.io.Serializable;
-
-public class Manager implements Serializable {
+public class Manager {
 
   private String employeeId;
   private String name;
-  private long departmentId;
+  private String deptId;
 
 
   public String getEmployeeId() {
@@ -28,12 +26,12 @@ public class Manager implements Serializable {
   }
 
 
-  public long getDepartmentId() {
-    return departmentId;
+  public String getDeptId() {
+    return deptId;
   }
 
-  public void setDepartmentId(long departmentId) {
-    this.departmentId = departmentId;
+  public void setDeptId(String deptId) {
+    this.deptId = deptId;
   }
 
 }

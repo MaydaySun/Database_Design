@@ -1,9 +1,7 @@
 package com.db_project.model;
 
 
-import java.io.Serializable;
-
-public class Employee implements Serializable {
+public class Employee {
 
   private String id;
   private String name;
@@ -13,7 +11,7 @@ public class Employee implements Serializable {
   private String city;
   private double phoneNumber;
   private String email;
-  private long departmentId;
+  private String deptId;
 
 
   public String getId() {
@@ -88,13 +86,12 @@ public class Employee implements Serializable {
   }
 
 
-  public long getDepartmentId() {
-    return departmentId;
+  public String getDeptId() {
+    return deptId;
   }
 
-  public void setDepartmentId(long departmentId) {
-    this.departmentId = departmentId;
+  public void setDeptId(String deptId) {
+    this.deptId = deptId;
   }
-
 
 }

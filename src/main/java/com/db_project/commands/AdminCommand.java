@@ -41,15 +41,13 @@ public class AdminCommand {
                     break;
                 case "getInfo":
                     //TODO 获取员工的个人信息和test record（参数：id）
+                    // 分别调用getEmployeeById和getTestRecordById来获取相关信息
                     break;
                 case "getLog":
                     //TODO get a single log by lid
                     break;
                 case "addLog":
                     //TODO 添加log（参数：content）
-                    break;
-                case "deleteLog":
-                    //TODO 删除log by lid
                     break;
                 case "logout":
                     return;// 登出，返回到Main.console()中等待下一次登录

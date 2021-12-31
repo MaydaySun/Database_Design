@@ -1,29 +1,27 @@
 package com.db_project.model;
 
 
-import java.io.Serializable;
+public class Department {
 
-public class Department implements Serializable {
-
-  private long departmentId;
-  private String departmentName;
+  private String deptId;
+  private String deptName;
 
 
-  public long getDepartmentId() {
-    return departmentId;
+  public String getDeptId() {
+    return deptId;
   }
 
-  public void setDepartmentId(long departmentId) {
-    this.departmentId = departmentId;
+  public void setDeptId(String deptId) {
+    this.deptId = deptId;
   }
 
 
-  public String getDepartmentName() {
-    return departmentName;
+  public String getDeptName() {
+    return deptName;
   }
 
-  public void setDepartmentName(String departmentName) {
-    this.departmentName = departmentName;
+  public void setDeptName(String deptName) {
+    this.deptName = deptName;
   }
 
 }

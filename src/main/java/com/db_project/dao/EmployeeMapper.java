@@ -1,8 +1,5 @@
 package com.db_project.dao;
 
-import com.db_project.model.Course;
-import com.db_project.model.Employee;
-import com.db_project.model.TestRecord;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
