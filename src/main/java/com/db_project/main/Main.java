@@ -15,6 +15,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main {
@@ -30,7 +31,7 @@ public class Main {
             CmdLineParser parser = new CmdLineParser(param);
             parser.parseArgument(arguments);
             if ("login".equals(arguments[0])){
-                SqlSession sqlSession;
+                SqlSession sqlSession = MybatisUtils.getSqlSession();
                 try {
                     switch (param.getType()){
                         case "admin":
@@ -42,9 +43,9 @@ public class Main {
                             else {
                                 System.out.println("wrong username for admin");
                             }
+                            sqlSession.close();
                             break;
                         case "employee":
-                            sqlSession = MybatisUtils.getSqlSession();
                             EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
                             Employee employee = employeeMapper.getEmployeeById(param.getUid());// TODO sql执行失败是异常还是返回null
                             sqlSession.close();
@@ -52,7 +53,6 @@ public class Main {
                             employeeCommand.listen();
                             break;
                         case "manager":
-                            sqlSession = MybatisUtils.getSqlSession();
                             ManagerMapper managerMapper = sqlSession.getMapper(ManagerMapper.class);
                             Manager manager = managerMapper.getManagerByUid(param.getUid());// TODO sql执行失败是异常还是返回null
                             sqlSession.close();
@@ -60,14 +60,19 @@ public class Main {
                             managerCommand.listen();
                             break;
                         case "instructor":
-                            sqlSession = MybatisUtils.getSqlSession();
                             InstructorMapper instructorMapper = sqlSession.getMapper(InstructorMapper.class);
-                            Instructor instructor = instructorMapper.getInstructorByUid(param.getUid());// TODO sql执行失败是异常还是返回null
+                            Instructor instructor = instructorMapper.getInstructor(param.getUid());// TODO sql执行失败是异常还是返回null
                             sqlSession.close();
                             InstructorCommand instructorCommand = new InstructorCommand(instructor);
                             instructorCommand.listen();
                             break;
                     }
+                }
+                catch (SQLException e){
+                    sqlSession.rollback();// sql执行失败，进行回滚
+                    sqlSession.close();
+                    System.err.println("Sql failed: " + e.getSQLState());
+                    e.printStackTrace();
                 }
                 catch (ArgNotFoundException e){
                     System.out.println("Necessary args not found for your instruction!");

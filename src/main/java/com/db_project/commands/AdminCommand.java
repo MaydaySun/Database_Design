@@ -13,7 +13,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
-import javax.print.attribute.standard.NumberUp;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;

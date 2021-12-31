@@ -5,6 +5,11 @@
 <!-- namespace指定你要实现的mapper接口全名 -->
 <mapper namespace="InstructorMapper">
     <!--标签名是操作方式，id与接口中方法名一致 resultType指定返回值类型的全名-->
+
+    <select id="getInstructor" resultType="Instructor">
+        select * from instructor where employee_id = #{iid};
+    </select>
+
     <select id="getStudents" resultType="Takes">
         select takes.* from takes, course where course.instructor_id = #{iid}
                                         and takes.course_id = course.course_id;

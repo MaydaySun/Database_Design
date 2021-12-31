@@ -48,6 +48,9 @@ create table manager
     unique (dept_id), -- 一个部门只能有一个部门主管，所以department_id需要唯一性约束
     foreign key (employee_id) references employee (id)
         on delete cascade -- 当employee信息变动，manager对应的信息也级联改动
+        on update cascade,
+    foreign key (dept_id) references department (dept_id)
+        on delete cascade
         on update cascade
 ) DEFAULT CHARSET = utf8;
 ALTER TABLE manager
