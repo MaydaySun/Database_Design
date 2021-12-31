@@ -103,7 +103,7 @@ ALTER TABLE test_record
 
 create table log
 (
-    log_id          int             auto_increment,
+    log_id          bigint             auto_increment,
     employee_id     varchar(10)     default 'admin', -- 操作者的id，若不是员工操作，默认值为admin操作
     content         varchar(100)     not null,
     time            TIMESTAMP       default current_timestamp, -- 日志时间戳
