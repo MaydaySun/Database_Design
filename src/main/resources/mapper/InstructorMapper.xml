@@ -20,4 +20,8 @@
                     values (#{cid}, #{id}, #{score});
     </insert>
 
+    <insert id="associateCourse">
+        insert into course_to_dept values (#{cid}, #{did}, #{required})
+    </insert>
+
 </mapper>

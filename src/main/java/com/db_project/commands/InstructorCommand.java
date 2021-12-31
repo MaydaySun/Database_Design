@@ -54,6 +54,16 @@ public class InstructorCommand {
                         //TODO add new test record for a student in some course by cid, id & score
                         // parse score from String to Long first
                         break;
+                    case "associateCourse":{
+                        String cid = param.getCid();
+                        String did = param.getDid();
+                        String required = "1".equals(param.getRequired()) ? "必修" : "选修";
+                        instructorMapper.associateCourse(cid, did, required);
+                        sqlSession.commit();
+                        sqlSession.close();
+                        System.out.println("Finished!");
+                    }
+                        //TODO associate course with department, meaning visible to the department
                     case "logout":
                         return;// 登出，返回到Main.console()中等待下一次登录
                 }

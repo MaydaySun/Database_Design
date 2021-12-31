@@ -25,6 +25,9 @@ public class Param {
     @Option(name="-iid", usage = "教员id")
     private String iid;
 
+    @Option(name="-required", usage = "是否必修")
+    private String required;
+
     @Option(name="-score", usage = "培训成绩")
     private String score;
 
@@ -74,6 +77,12 @@ public class Param {
         if (iid == null)
             throw new ArgNotFoundException();
         return iid;
+    }
+
+    public String getRequired() throws ArgNotFoundException{
+        if (required == null)
+            throw new ArgNotFoundException();
+        return required;
     }
 
     public String getScore() throws ArgNotFoundException {
