@@ -47,7 +47,7 @@ public class ManagerCommand {
                     //TODO 查询可以转部门的员工（即本部门必修课、员工在本部门的选修课全部通过的员工） by manager.dept_id
                 case "getNewCourses":
                     //TODO 查询新部门的必修课 by did
-                case "logo1ut":
+                case "logout":
                     return;// 登出，返回到Main.console()中等待下一次登录
             }
         }
