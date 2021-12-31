@@ -21,7 +21,8 @@ public class ManagerCommand {
             parser.parseArgument(args);
             switch (args[0]){
                 case "getEmployees":
-                    //TODO get employees' info by manager.dept_id(employees in department but not in manager)
+                    //TODO get employees' info by manager.dept_id(employees in department
+                    // but not in manager)
                     break;
                 case "getCourses":
                     //TODO get courses associated to department by manager.dept_id
@@ -34,6 +35,7 @@ public class ManagerCommand {
                     break;
                 case "shift":
                     //TODO 根据id/name转移指定员工到指定部门（参数：id/name）
+                    // 应该确保同一个部门没有同名的员工
                     break;
                 case "getPassed":
                     //TODO 查询已通过的takes（员工&课程） by manager.dept_id

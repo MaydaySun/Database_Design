@@ -36,8 +36,9 @@ public class Main {
                             AdminCommand adminCommand = new AdminCommand();
                             adminCommand.listen();
                         }
-                        else
+                        else {
                             System.out.println("wrong username for admin");
+                        }
                         break;
                     case "employee":
                         sqlSession = MybatisUtils.getSqlSession();
