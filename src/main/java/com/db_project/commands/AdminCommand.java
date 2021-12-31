@@ -34,8 +34,9 @@ public class AdminCommand {
                     case "getEmployee":{
                         String id = param.getUid();
                         Employee employee = adminMapper.getEmployee(id);
-                        System.out.println(Tool.toString(employee));
+                        sqlSession.commit();
                         sqlSession.close();
+                        System.out.println(Tool.toString(employee));
                     }
                     //TODO get employee's info by id
                     break;
@@ -43,9 +44,9 @@ public class AdminCommand {
                         String id = param.getUid();
                         String name = param.getName();
                         adminMapper.updateEmployee(id, name);
-                        System.out.println("Finished!");
                         sqlSession.commit();
                         sqlSession.close();
+                        System.out.println("Finished!");
                     }
                         //TODO update employee name by id
                         break;
@@ -54,25 +55,26 @@ public class AdminCommand {
                         String name = param.getName();
                         String did = param.getDid();
                         adminMapper.addEmployee(id, name, did);
-                        System.out.println("Finished!");
                         sqlSession.commit();
                         sqlSession.close();
+                        System.out.println("Finished!");
                     }
                         //TODO 添加员工（需要参数：id, name, did）
                         break;
                     case "deleteEmployee":{
                         String id = param.getUid();
                         adminMapper.deleteCourse(id);
-                        System.out.println("Finished!");
                         sqlSession.commit();
                         sqlSession.close();
+                        System.out.println("Finished!");
                     }
                         //TODO 删除员工 by id
                     case "getCourse":{
                         String cid = param.getCid();
                         Course course = adminMapper.getCourse(cid);
-                        System.out.println(Tool.toString(course));
+                        sqlSession.commit();
                         sqlSession.close();
+                        System.out.println(Tool.toString(course));
                     }
                         //TODO get course by cid
                         break;
@@ -80,9 +82,9 @@ public class AdminCommand {
                         String cid = param.getCid();
                         String title = param.getTitle();
                         adminMapper.updateCourse(cid, title);
-                        System.out.println("Finished!");
                         sqlSession.commit();
                         sqlSession.close();
+                        System.out.println("Finished!");
                     }
                         //TODO update course title by cid
                         break;
@@ -91,18 +93,18 @@ public class AdminCommand {
                         String title = param.getTitle();
                         String iid = param.getIid();
                         adminMapper.addCourse(cid, title, iid);
-                        System.out.println("Finished!");
                         sqlSession.commit();
                         sqlSession.close();
+                        System.out.println("Finished!");
                     }
                         //TODO 添加课程(参数：cid, title, instructor)
                         break;
                     case "deleteCourse":{
                         String cid = param.getCid();
                         adminMapper.deleteCourse(cid);
-                        System.out.println("Finished!");
                         sqlSession.commit();
                         sqlSession.close();
+                        System.out.println("Finished!");
                     }
                         //TODO 删除课程（参数：cid）
                         break;
@@ -111,10 +113,11 @@ public class AdminCommand {
                         Employee employee = adminMapper.getEmployee(id);
                         System.out.println(Tool.toString(employee));
                         List<TestRecord> testRecords = adminMapper.getTestRecords(id);
+                        sqlSession.commit();
+                        sqlSession.close();
                         for (TestRecord testRecord : testRecords) {
                             System.out.println(Tool.toString(testRecord));
                         }
-                        sqlSession.close();
                     }
                         //TODO 获取员工的test records（参数：id）
                         // 分别调用getEmployee和getTestRecords来获取相关信息
@@ -122,8 +125,9 @@ public class AdminCommand {
                     case "getLog":{
                         Long lid = Long.parseLong(param.getLid());
                         Log log = adminMapper.getLog(lid);
-                        System.out.println(Tool.toString(log));
+                        sqlSession.commit();
                         sqlSession.close();
+                        System.out.println(Tool.toString(log));
                     }
                         //TODO get a single log by lid，parse lid from String to Long first
                         break;
@@ -145,11 +149,12 @@ public class AdminCommand {
                 }
             }
             catch (SQLException e){
+                sqlSession.rollback();// sql执行失败，进行回滚
+                sqlSession.close();
                 System.err.println("Sql failed: " + e.getSQLState());
                 e.printStackTrace();
-                sqlSession.close();
             }
-            catch (ArgNotFoundException e){
+            catch (ArgNotFoundException | NumberFormatException e){
                 System.err.println("Necessary args not found for your instruction");
                 e.printStackTrace();
                 sqlSession.close();
