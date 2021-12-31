@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace指定你要实现的mapper接口全名 -->
+<mapper namespace="ManagerMapper">
+    <!--标签名是操作方式，id与接口中方法名一致 resultType指定返回值类型的全名-->
+    <select id="getManagerByUid" resultType="Manager">
+        select * from manager where employee_id = #{id}
+    </select>
+</mapper>
