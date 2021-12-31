@@ -73,7 +73,7 @@ create table course
 (
     course_id       varchar(7)      not null,
     title           varchar(20)     not null, -- 课程编号和名称不能为空
-    type            varchar(10)      default '尚无分类', -- 课程类型
+    type            varchar(10)     default '尚无分类', -- 课程类型
     content         varchar(50)     default '尚无描述',
     instructor_id   varchar(11)     not null, -- 一门课只有一个教员教授，以instructor_id作为course的属性即可
     primary key (course_id),
@@ -86,7 +86,7 @@ ALTER TABLE course
 
 create table test_record -- 单次测试的记录
 (
-    record_id       bigint          not null    auto_increment, -- 测试记录可能会很多，使用bigint
+    record_id       bigint          auto_increment, -- 测试记录可能会很多，使用bigint
     course_id       varchar(7)      not null,
     employee_id     varchar(11)     not null,
     score           int             not null    check ( score >= 0 and score <= 100 ), -- 当某次测试的score达到60需要更新takes表中对应记录为已通过
@@ -103,10 +103,10 @@ ALTER TABLE test_record
 
 create table log
 (
-    log_id      int             not null    auto_increment,
-    username    varchar(10)     not null    default 'admin', -- 操作者的姓名，若不是员工操作，默认值为admin操作
-    content     varchar(30)     not null,
-    time        TIMESTAMP       default current_timestamp, -- 日志时间戳
+    log_id          int             auto_increment,
+    employee_id     varchar(10)     default 'admin', -- 操作者的id，若不是员工操作，默认值为admin操作
+    content         varchar(30)     not null,
+    time            TIMESTAMP       default current_timestamp, -- 日志时间戳
     primary key (log_id)
 ) DEFAULT CHARSET = utf8;
 ALTER TABLE log
@@ -116,7 +116,7 @@ create table takes
 (
     employee_id     varchar(11)     not null,
     course_id       varchar(7)      not null,
-    completed       int             not null    default 0   check ( completed in (0, 1)),-- 结课状态，默认为未结课。
+    completed       int             default 0   check ( completed in (0, 1)),-- 结课状态，默认为未结课。
     -- 结课状态针对的是(employee_id, course_id)即一个员工是否学习完了该课程，而不是该课程是否已经结束并注销
     -- 直到管理员将此课程从course表中移除，代表该课程已注销
     is_passed       int             check ( is_passed in  (null, 0, 1)), -- 培训的通过状态

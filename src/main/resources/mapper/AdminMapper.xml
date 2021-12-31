@@ -45,7 +45,7 @@
         select * from log where log_id = #{lid};
     </select>
 
-    <insert id="getLog">
+    <insert id="addLog">
         insert into log(content) values(#{content});
     </insert>
 
