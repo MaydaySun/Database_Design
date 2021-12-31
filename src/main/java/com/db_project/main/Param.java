@@ -1,5 +1,6 @@
 package com.db_project.main;
 
+import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.Option;
 
 public class Param {
@@ -14,6 +15,9 @@ public class Param {
 
     @Option(name="-cid", usage = "课程编号")
     private String cid;
+
+    @Option(name="-title", usage = "课程名称")
+    private String title;
 
     @Option(name="-did", usage = "部门编号")
     private String did;
@@ -30,39 +34,63 @@ public class Param {
     @Option(name="-content", usage = "日志内容")
     private String content;
 
-    public String getUid() {
+    public String getUid() throws ArgNotFoundException {
+        if (uid == null)
+            throw new ArgNotFoundException();
         return uid;
     }
 
-    public String getType() {
+    public String getType() throws ArgNotFoundException {
+        if (type == null)
+            throw new ArgNotFoundException();
         return type;
     }
 
-    public String getName() {
+    public String getName() throws ArgNotFoundException {
+        if (name == null)
+            throw new ArgNotFoundException();
         return name;
     }
 
-    public String getCid() {
+    public String getCid() throws ArgNotFoundException {
+        if (cid == null)
+            throw new ArgNotFoundException();
         return cid;
     }
 
-    public String getDid() {
+    public String getTitle() throws ArgNotFoundException {
+        if (title == null)
+            throw new ArgNotFoundException();
+        return title;
+    }
+
+    public String getDid() throws ArgNotFoundException {
+        if (did == null)
+            throw new ArgNotFoundException();
         return did;
     }
 
-    public String getIid() {
+    public String getIid() throws ArgNotFoundException {
+        if (iid == null)
+            throw new ArgNotFoundException();
         return iid;
     }
 
-    public String getScore() {
+    public String getScore() throws ArgNotFoundException {
+        if (score == null)
+            throw new ArgNotFoundException();
         return score;
     }
 
-    public String getLid() {
+    public String getLid() throws ArgNotFoundException {
+        if (lid == null)
+            throw new ArgNotFoundException();
         return lid;
     }
 
-    public String getContent() {
+    public String getContent() throws ArgNotFoundException {
+        if (content == null)
+            throw new ArgNotFoundException();
         return content;
     }
 }

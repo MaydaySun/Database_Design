@@ -6,10 +6,10 @@ public class Employee {
   private String id;
   private String name;
   private String gender;
-  private long age;
+  private Long age;
   private java.sql.Timestamp dateEmployed;
   private String city;
-  private double phoneNumber;
+  private String phoneNumber;
   private String email;
   private String deptId;
 
@@ -68,11 +68,11 @@ public class Employee {
   }
 
 
-  public double getPhoneNumber() {
+  public String getPhoneNumber() {
     return phoneNumber;
   }
 
-  public void setPhoneNumber(double phoneNumber) {
+  public void setPhoneNumber(String phoneNumber) {
     this.phoneNumber = phoneNumber;
   }
 

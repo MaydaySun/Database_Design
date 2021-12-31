@@ -1,6 +1,7 @@
 package com.db_project.commands;
 
 import com.db_project.main.Param;
+import com.db_project.model.Manager;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 

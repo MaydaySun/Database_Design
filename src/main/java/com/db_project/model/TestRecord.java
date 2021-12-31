@@ -3,10 +3,10 @@ package com.db_project.model;
 
 public class TestRecord {
 
-  private long recordId;
+  private Long recordId;
   private String courseId;
   private String employeeId;
-  private long score;
+  private Long score;
 
 
   public long getRecordId() {

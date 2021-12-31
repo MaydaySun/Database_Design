@@ -3,24 +3,50 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace指定你要实现的mapper接口全名 -->
-<mapper namespace="com.db_project.com.db_project.dao.EmployeeMapper">
+<mapper namespace="AdminMapper">
     <!--标签名是操作方式，id与接口中方法名一致 resultType指定返回值类型的全名-->
-<!--    <select id="getEmployee" resultType="com.term.model.User">-->
-<!--       select * from user-->
-<!--    </select>-->
-<!--    <select id="">-->
-<!--        select-->
-<!--    </select>-->
+    <select id="getEmployee" resultType="Employee">
+       select 0 from employee where id = #{id};
+    </select>
 
-    <!--    <update id="updateUser" parameterType="com.term.model.User">-->
-    <!--用#{}传入参数，实体类的属性可以直接用属性名调用，方法参数可以直接用参数名-->
-    <!--        update user set name=#{name},pwd=#{pwd} where id=#{id}-->
-    <!--    </update>-->
-    <!--    <insert id="addUser" parameterType="com.term.model.User">-->
-    <!--        insert into user (id,name,pwd) values (#{id},#{name},#{pwd})-->
-    <!--    </insert>-->
-    <!--    <delete id="deleteUser" parameterType="int">-->
-    <!--        delete from user where id=#{id}-->
-    <!--    </delete>-->
+    <update id="updateEmployee">
+        update employee set name = #{name} where id = #{id};
+    </update>
+
+    <insert id="addEmployee">
+       insert into employee(id, name, dept_id) values (#{id}, #{name}, #{did});
+    </insert>
+
+    <delete id="deleteEmployee">
+        delete from employee where id = #{id};
+    </delete>
+
+    <select id="getCourse" resultType="Course">
+        select * from course where course_id = #{cid};
+    </select>
+
+    <update id="updateCourse">
+        update course set title = #{title} where title = #{title}
+    </update>
+
+    <insert id="addCourse">
+        insert into course(course_id, title, instructor_id) values (#{cid}, #{title}, #{iid})
+    </insert>
+
+    <delete id="deleteCourse">
+        delete from course where course_id = #{cid};
+    </delete>
+
+    <select id="getTestRecord">
+        select * from test_record where employee_id = #{id};
+    </select>
+
+    <select id="getLog">
+        select * from log where log_id = #{lid};
+    </select>
+
+    <insert id="getLog">
+        insert into log(content) values(#{content});
+    </insert>
 
 </mapper>

@@ -5,8 +5,8 @@ public class Takes {
 
   private String employeeId;
   private String courseId;
-  private long completed;
-  private long isPassed;
+  private Long completed;
+  private Long isPassed;
 
 
   public String getEmployeeId() {

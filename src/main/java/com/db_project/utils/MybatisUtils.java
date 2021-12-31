@@ -1,5 +1,6 @@
 package com.db_project.utils;
 
+import com.db_project.model.*;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;

@@ -5,7 +5,7 @@
 <configuration>
     <typeAliases>
         <!--<typeAlias type="com.db_project.model.User" alias="user"/>-->
-        <!-- 自动扫描model包下的全部类-->
+        <!-- 自动扫描model和dao包下的全部类，创建别名-->
         <package name="com.db_project.model"/>
         <package name="com.db_project.dao"/>
     </typeAliases>

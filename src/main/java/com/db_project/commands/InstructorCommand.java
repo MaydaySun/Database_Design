@@ -1,6 +1,7 @@
 package com.db_project.commands;
 
 import com.db_project.main.Param;
+import com.db_project.model.Instructor;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
@@ -20,10 +21,11 @@ public class InstructorCommand {
             parser.parseArgument(args);
             switch (args[0]){
                 case "getStudents":
-                    //TODO get all students id & name by instructor.employee_id
+                    //TODO get all takes by instructor.employee_id
                     break;
                 case "addGrade":
-                    //TODO add new test record for a student in some course by id, cid & score
+                    //TODO add new test record for a student in some course by cid, id & score
+                    // parse score from String to Long first
                     break;
                 case "logout":
                     return;// 登出，返回到Main.console()中等待下一次登录

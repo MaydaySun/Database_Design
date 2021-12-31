@@ -1,9 +1,21 @@
 package com.db_project.commands;
 
+import com.db_project.dao.AdminMapper;
+import com.db_project.main.ArgNotFoundException;
 import com.db_project.main.Param;
+import com.db_project.model.Course;
+import com.db_project.model.Employee;
+import com.db_project.model.Log;
+import com.db_project.model.TestRecord;
+import com.db_project.utils.MybatisUtils;
+import com.db_project.utils.Tool;
+import org.apache.ibatis.session.SqlSession;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
+import javax.print.attribute.standard.NumberUp;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class AdminCommand {
@@ -15,42 +27,132 @@ public class AdminCommand {
             String[] args = scanner.nextLine().split(" ");
             CmdLineParser parser = new CmdLineParser(param);
             parser.parseArgument(args);
-            switch (args[0]){
-                case "getEmployee":
+            SqlSession sqlSession = MybatisUtils.getSqlSession();
+            AdminMapper adminMapper = sqlSession.getMapper(AdminMapper.class);
+            try {
+                switch (args[0]){
+                    case "getEmployee":{
+                        String id = param.getUid();
+                        Employee employee = adminMapper.getEmployee(id);
+                        System.out.println(Tool.toString(employee));
+                        sqlSession.close();
+                    }
                     //TODO get employee's info by id
                     break;
-                case "updateEmployee":
-                    //TODO update employee name by id
-                    break;
-                case "addEmployee":
-                    //TODO 添加员工（需要参数：id, name, did）
-                    break;
-                case "deleteEmployee":
-                    //TODO 删除员工 by id
-                case "getCourse":
-                    //TODO get course by cid
-                    break;
-                case "updateCourse":
-                    //TODO update course title by cid
-                    break;
-                case "addCourse":
-                    //TODO 添加课程(参数：cid, title, instructor)
-                    break;
-                case "deleteCourse":
-                    //TODO 删除课程（参数：cid）
-                    break;
-                case "getInfo":
-                    //TODO 获取员工的个人信息和test record（参数：id）
-                    // 分别调用getEmployeeById和getTestRecordById来获取相关信息
-                    break;
-                case "getLog":
-                    //TODO get a single log by lid
-                    break;
-                case "addLog":
-                    //TODO 添加log（参数：content）
-                    break;
-                case "logout":
-                    return;// 登出，返回到Main.console()中等待下一次登录
+                    case "updateEmployee":{
+                        String id = param.getUid();
+                        String name = param.getName();
+                        adminMapper.updateEmployee(id, name);
+                        System.out.println("Finished!");
+                        sqlSession.commit();
+                        sqlSession.close();
+                    }
+                        //TODO update employee name by id
+                        break;
+                    case "addEmployee":{
+                        String id = param.getUid();
+                        String name = param.getName();
+                        String did = param.getDid();
+                        adminMapper.addEmployee(id, name, did);
+                        System.out.println("Finished!");
+                        sqlSession.commit();
+                        sqlSession.close();
+                    }
+                        //TODO 添加员工（需要参数：id, name, did）
+                        break;
+                    case "deleteEmployee":{
+                        String id = param.getUid();
+                        adminMapper.deleteCourse(id);
+                        System.out.println("Finished!");
+                        sqlSession.commit();
+                        sqlSession.close();
+                    }
+                        //TODO 删除员工 by id
+                    case "getCourse":{
+                        String cid = param.getCid();
+                        Course course = adminMapper.getCourse(cid);
+                        System.out.println(Tool.toString(course));
+                        sqlSession.close();
+                    }
+                        //TODO get course by cid
+                        break;
+                    case "updateCourse":{
+                        String cid = param.getCid();
+                        String title = param.getTitle();
+                        adminMapper.updateCourse(cid, title);
+                        System.out.println("Finished!");
+                        sqlSession.commit();
+                        sqlSession.close();
+                    }
+                        //TODO update course title by cid
+                        break;
+                    case "addCourse":{
+                        String cid = param.getCid();
+                        String title = param.getTitle();
+                        String iid = param.getIid();
+                        adminMapper.addCourse(cid, title, iid);
+                        System.out.println("Finished!");
+                        sqlSession.commit();
+                        sqlSession.close();
+                    }
+                        //TODO 添加课程(参数：cid, title, instructor)
+                        break;
+                    case "deleteCourse":{
+                        String cid = param.getCid();
+                        adminMapper.deleteCourse(cid);
+                        System.out.println("Finished!");
+                        sqlSession.commit();
+                        sqlSession.close();
+                    }
+                        //TODO 删除课程（参数：cid）
+                        break;
+                    case "getInfo":{
+                        String id = param.getUid();
+                        Employee employee = adminMapper.getEmployee(id);
+                        System.out.println(Tool.toString(employee));
+                        List<TestRecord> testRecords = adminMapper.getTestRecords(id);
+                        for (TestRecord testRecord : testRecords) {
+                            System.out.println(Tool.toString(testRecord));
+                        }
+                        sqlSession.close();
+                    }
+                        //TODO 获取员工的test records（参数：id）
+                        // 分别调用getEmployee和getTestRecords来获取相关信息
+                        break;
+                    case "getLog":{
+                        Long lid = Long.parseLong(param.getLid());
+                        Log log = adminMapper.getLog(lid);
+                        System.out.println(Tool.toString(log));
+                        sqlSession.close();
+                    }
+                        //TODO get a single log by lid，parse lid from String to Long first
+                        break;
+                    case "addLog":{
+                        String content = param.getContent();
+                        adminMapper.addLog(content);
+                        System.out.println("Finished!");
+                        sqlSession.commit();
+                        sqlSession.close();
+                    }
+                        //TODO 添加log（参数：content）
+                        break;
+                    case "logout":
+                        sqlSession.close();
+                        return;// 登出，返回到Main.console()中等待下一次登录
+                    default:
+                        sqlSession.close();
+                        System.out.println("请输入合法指令");
+                }
+            }
+            catch (SQLException e){
+                System.err.println("Sql failed: " + e.getSQLState());
+                e.printStackTrace();
+                sqlSession.close();
+            }
+            catch (ArgNotFoundException e){
+                System.err.println("Necessary args not found for your instruction");
+                e.printStackTrace();
+                sqlSession.close();
             }
         }
     }

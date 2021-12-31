@@ -26,7 +26,7 @@ create table employee
     age             int,
     date_employed   TIMESTAMP       default current_timestamp, -- 默认认为该员工是今天才录取的
     city            varchar(4),
-    phone_number    numeric(11, 0),
+    phone_number    varchar(11),
     email           varchar(50),
     dept_id         varchar(8)      not null,
     primary key (id),
@@ -96,7 +96,7 @@ create table log
 (
     log_id      int             not null    auto_increment,
     username    varchar(10)     not null    default 'admin', -- 操作者的姓名，若不是员工操作，默认值为admin操作
-    content   varchar(30)     not null,
+    content     varchar(30)     not null,
     time        TIMESTAMP       default current_timestamp, -- 日志时间戳
     primary key (log_id)
 ) DEFAULT CHARSET = utf8;

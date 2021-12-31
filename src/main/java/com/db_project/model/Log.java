@@ -3,7 +3,7 @@ package com.db_project.model;
 
 public class Log {
 
-  private long logId;
+  private Long logId;
   private String username;
   private String content;
   private java.sql.Timestamp time;
