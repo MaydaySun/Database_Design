@@ -1,6 +1,7 @@
 package com.db_project.commands;
 
 import com.db_project.main.Param;
+import com.db_project.model.Manager;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
@@ -9,7 +10,7 @@ import java.util.Scanner;
 public class ManagerCommand {
     private Manager manager;
 
-    ManagerCommand(Manager manager){this.manager = manager;}
+    public ManagerCommand(Manager manager){this.manager = manager;}
 
     public void listen() throws CmdLineException {
         Scanner scanner = new Scanner(System.in);

@@ -6,6 +6,8 @@ import com.db_project.commands.InstructorCommand;
 import com.db_project.commands.ManagerCommand;
 import com.db_project.dao.EmployeeMapper;
 import com.db_project.model.Employee;
+import com.db_project.model.Instructor;
+import com.db_project.model.Manager;
 import com.db_project.utils.MybatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.kohsuke.args4j.CmdLineException;
@@ -56,7 +58,7 @@ public class Main {
                     case "instructor":
                         sqlSession = MybatisUtils.getSqlSession();
                         InstructorMapper instructorMapper = sqlSession.getMapper(InstructorMapper.class);
-                        Instructorr instructor = InstructorMapper.getInstructorByUid(param.getUid());// TODO sql执行失败是异常还是返回null
+                        Instructor instructor = InstructorMapper.getInstructorByUid(param.getUid());// TODO sql执行失败是异常还是返回null
                         sqlSession.close();
                         InstructorCommand instructorCommand = new InstructorCommand(instructor);
                         instructorCommand.listen();

@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class EmployeeCommand {
     private Employee employee;
 
-    EmployeeCommand(Employee employee){this.employee = employee;}
+    public EmployeeCommand(Employee employee){this.employee = employee;}
 
     public void listen() throws CmdLineException {
         Scanner scanner = new Scanner(System.in);

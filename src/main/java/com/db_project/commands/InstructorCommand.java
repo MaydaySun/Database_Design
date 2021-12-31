@@ -1,6 +1,7 @@
 package com.db_project.commands;
 
 import com.db_project.main.Param;
+import com.db_project.model.Instructor;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
@@ -9,7 +10,7 @@ import java.util.Scanner;
 public class InstructorCommand {
     private Instructor instructor;
 
-    InstructorCommand(Instructor instructor){this.instructor = instructor;}
+    public InstructorCommand(Instructor instructor){this.instructor = instructor;}
 
     public void listen() throws CmdLineException {
         Scanner scanner = new Scanner(System.in);
