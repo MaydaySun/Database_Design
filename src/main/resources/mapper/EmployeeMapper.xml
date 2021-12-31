@@ -5,12 +5,16 @@
 <!-- namespace指定你要实现的mapper接口全名 -->
 <mapper namespace="com.db_project.com.db_project.dao.EmployeeMapper">
     <!--标签名是操作方式，id与接口中方法名一致 resultType指定返回值类型的全名-->
-    <select id="getAllUsers" resultType="com.term.model.User">
-       select * from user
+    <select id="getEmployeeById" >
+        select * from employee where id = #{id}
     </select>
-    <select id="">
-        select
+    <select id="update">
+        update employee set name = #{new_name} where id = #{id}
     </select>
+    <select id="getCourse">
+        select * from course where course_id =
+    </select>>
+
 
 <!--    <update id="updateUser" parameterType="com.term.model.User">-->
         <!--用#{}传入参数，实体类的属性可以直接用属性名调用，方法参数可以直接用参数名-->
