@@ -8,9 +8,9 @@
     <select id="getEmployeeById" >
         select * from employee where id = #{id};
     </select>
-    <select id="update">
+    <update id="update">
         update employee set name = #{new_name} where id = #{id};
-    </select>
+    </update>
     <select id="getCourse" resultType="Course">
         select course from course, takes
         where course.course_id = takes.course_id
@@ -19,17 +19,4 @@
     <select id="getTestRecords" resultType="TestRecord">
         select * from test_record where employee_id = #{id}
     </select>
-
-
-<!--    <update id="updateUser" parameterType="com.term.model.User">-->
-        <!--用#{}传入参数，实体类的属性可以直接用属性名调用，方法参数可以直接用参数名-->
-<!--        update user set name=#{name},pwd=#{pwd} where id=#{id}-->
-<!--    </update>-->
-<!--    <insert id="addUser" parameterType="com.term.model.User">-->
-<!--        insert into user (id,name,pwd) values (#{id},#{name},#{pwd})-->
-<!--    </insert>-->
-<!--    <delete id="deleteUser" parameterType="int">-->
-<!--        delete from user where id=#{id}-->
-<!--    </delete>-->
-
 </mapper>
