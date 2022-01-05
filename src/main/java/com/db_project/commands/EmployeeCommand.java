@@ -22,13 +22,22 @@ public class EmployeeCommand {
     public EmployeeCommand(Employee employee){this.employee = employee;}
 
     public void listen() throws CmdLineException {
+        System.out.println("欢迎，" + employee.getName());
         Scanner scanner = new Scanner(System.in);
         Param param = new Param();
         while (scanner.hasNextLine()){
             String[] args = scanner.nextLine().split(" ");
             CmdLineParser parser = new CmdLineParser(param);
             if(args.length > 1) {
-                parser.parseArgument(Arrays.copyOfRange(args, 1, args.length));
+                try {
+                    parser.parseArgument(Arrays.copyOfRange(args, 1, args.length));
+                }
+                catch (CmdLineException e){
+                    System.out.println("invalid option in your command");
+                    e.printStackTrace();
+                    continue;
+                }
+
             }
 
             SqlSession sqlSession = MybatisUtils.getSqlSession();
@@ -56,7 +65,7 @@ public class EmployeeCommand {
 
                         this.employee = employeeMapper.getEmployeeById(employee.getId());
                         Department department = employeeMapper.getDept(employee.getDeptId());
-                        System.out.println("现在的个人信息是：");
+                        System.out.println("你现在的个人信息是：");
                         PrintingTool.wrapToTable(employee, department, true);
 
                         sqlSession.commit();
@@ -65,8 +74,15 @@ public class EmployeeCommand {
                     }
                     case "getCourses": {
                         List<Map<String, Object>> courses = employeeMapper.getCourses(employee.getId());
+                        sqlSession.commit();
+                        sqlSession.close();
+
                         if(courses.size() != 0) {
                             for (Map<String, Object> course: courses) {
+                                if(!course.containsKey("status")){
+                                    course.put("status", -1);
+                                }
+
                                 if( (int)course.get("status") == 0){
                                     course.put("status", "挂科");
                                 }
@@ -82,8 +98,6 @@ public class EmployeeCommand {
                         }else {
                             System.out.println("你暂时没有课");
                         }
-                        sqlSession.commit();
-                        sqlSession.close();
                         break;
                     }
                     case "getTestRecords": {
@@ -99,7 +113,11 @@ public class EmployeeCommand {
                         break;
                     }
                     case "logout":
+                        System.out.println("bye~");
                         return;// 登出，返回到Main.console()中等待下一次登录
+                    default:
+                        System.out.println("unknown command type");
+                        break;
                 }
             } catch (SQLException e) {
                 sqlSession.rollback();

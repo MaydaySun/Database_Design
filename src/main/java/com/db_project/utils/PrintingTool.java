@@ -127,7 +127,7 @@ public class PrintingTool {
         //打印内容
         for (Map<String, Object> crtObj : maps){
             for( String key : crtObj.keySet() ){
-                System.out.print(wrapString(key, lengthOfValues.get(key)));
+                System.out.print(wrapString((String) crtObj.get(key), lengthOfValues.get(key)));
             }
             System.out.println(" |");
             System.out.println(tableLine);

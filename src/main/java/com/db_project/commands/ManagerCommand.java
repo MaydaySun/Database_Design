@@ -28,6 +28,7 @@ public class ManagerCommand {
     }
 
     public void listen() throws CmdLineException {
+        System.out.println("你好");
         Scanner scanner = new Scanner(System.in);
         Param param = new Param();
         while (scanner.hasNextLine()){

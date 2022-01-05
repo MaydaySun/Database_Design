@@ -4,6 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace指定你要实现的mapper接口全名 -->
 <mapper namespace="com.db_project.dao.EmployeeMapper">
+
+    <resultMap id="HashMap" type="java.util.HashMap" autoMapping="true">
+    </resultMap>
+
     <!--标签名是操作方式，id与接口中方法名一致 resultType指定返回值类型的全名-->
     <select id="getEmployeeById" resultType="com.db_project.model.Employee">
         select * from employee where id = #{id};
@@ -18,13 +22,14 @@
         where id = #{id};
     </update>
 
-    <select id="getCourse">
-        select course.course_id, course.title as name, course.content, instructor.name, takes.is_passed as status
+    <select id="getCourses" resultMap="HashMap">
+        select course.course_id, course.title, course.content, instructor.name, takes.is_passed as status
         from course, takes, instructor
         where course.course_id = takes.course_id
           and instructor.employee_id = course.instructor_id
           and takes.employee_id = #{id};
     </select>
+
 
     <select id="getTestRecords" resultType="TestRecord">
         select course.course_id, course.title, test_record.score

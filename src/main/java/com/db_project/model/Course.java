@@ -3,22 +3,22 @@ package com.db_project.model;
 
 public class Course {
 
-  private String courseId;
+  private String course_id;
   private String title;
   private String type;
   private String content;
-  private String instructorId;
+  private String instructor_id;
 
-  private CourseToDept courseToDept;
+  private CourseToDept course_to_dept;
   private Instructor instructor;
 
 
   public String getCourseId() {
-    return courseId;
+    return course_id;
   }
 
   public void setCourseId(String courseId) {
-    this.courseId = courseId;
+    this.course_id = courseId;
   }
 
 
@@ -50,19 +50,19 @@ public class Course {
 
 
   public String getInstructorId() {
-    return instructorId;
+    return instructor_id;
   }
 
   public void setInstructorId(String instructorId) {
-    this.instructorId = instructorId;
+    this.instructor_id = instructorId;
   }
 
   public CourseToDept getCourseToDept(){
-    return this.courseToDept;
+    return this.course_to_dept;
   }
 
   public void setCourseToDept(CourseToDept courseToDept){
-    this.courseToDept = courseToDept;
+    this.course_to_dept = courseToDept;
   }
 
   public Instructor getInstructor(){

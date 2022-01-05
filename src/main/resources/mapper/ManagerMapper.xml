@@ -8,7 +8,7 @@
         select * from manager where employee_id = #{id};
     </select>
 
-    <select id="getEmployeeByDeptId" resultType="com.db_project.model.Employee">
+    <select id="getEmployeesByDeptId" resultType="com.db_project.model.Employee">
         select * from employee where dept_id = #{dept_id}
         and employee.id not in
             (select employee_id from manager where manager.employee_id = #{dept_id});

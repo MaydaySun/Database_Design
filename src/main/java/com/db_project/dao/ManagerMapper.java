@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface ManagerMapper {
-    Manager getManagerByUid(@Param("employee_id")String id) throws SQLException;
+    Manager getManagerByUid(@Param("id")String id) throws SQLException;
 
 
     List<Employee> getEmployeesByDeptId(@Param("dept_id")String deptId) throws SQLException;

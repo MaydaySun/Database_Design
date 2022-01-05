@@ -26,5 +26,6 @@
         <mapper resource="mapper/AdminMapper.xml"/>
         <mapper resource="mapper/InstructorMapper.xml"/>
         <mapper resource="mapper/ManagerMapper.xml"/>
+        <mapper resource="mapper/LogMapper.xml"/>
     </mappers>
 </configuration>
