@@ -3,18 +3,18 @@ package com.db_project.model;
 
 public class Log {
 
-  private Long logId;
+  private Long log_id;
   private String username;
   private String content;
   private java.sql.Timestamp time;
 
 
   public long getLogId() {
-    return logId;
+    return log_id;
   }
 
   public void setLogId(long logId) {
-    this.logId = logId;
+    this.log_id = logId;
   }
 
 

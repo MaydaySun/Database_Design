@@ -16,10 +16,12 @@ import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws CmdLineException {
+        System.out.println("hello~");
         console();
     }
 
@@ -29,7 +31,7 @@ public class Main {
         while (scanner.hasNextLine()){
             String[] arguments = scanner.nextLine().split(" ");
             CmdLineParser parser = new CmdLineParser(param);
-            parser.parseArgument(arguments);
+            parser.parseArgument(Arrays.copyOfRange(arguments, 1, arguments.length));
             if ("login".equals(arguments[0])){
                 SqlSession sqlSession = MybatisUtils.getSqlSession();
                 try {

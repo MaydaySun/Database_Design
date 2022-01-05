@@ -3,26 +3,26 @@ package com.db_project.model;
 
 public class CourseToDept {
 
-  private String courseId;
-  private String deptId;
+  private String course_id;
+  private String dept_id;
   private String required;
 
 
   public String getCourseId() {
-    return courseId;
+    return course_id;
   }
 
   public void setCourseId(String courseId) {
-    this.courseId = courseId;
+    this.course_id = courseId;
   }
 
 
   public String getDeptId() {
-    return deptId;
+    return dept_id;
   }
 
   public void setDeptId(String deptId) {
-    this.deptId = deptId;
+    this.dept_id = deptId;
   }
 
 

@@ -3,17 +3,17 @@ package com.db_project.model;
 
 public class Manager {
 
-  private String employeeId;
+  private String employee_id;
   private String name;
   private String deptId;
 
 
   public String getEmployeeId() {
-    return employeeId;
+    return employee_id;
   }
 
   public void setEmployeeId(String employeeId) {
-    this.employeeId = employeeId;
+    this.employee_id = employeeId;
   }
 
 

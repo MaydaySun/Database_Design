@@ -3,27 +3,27 @@ package com.db_project.model;
 
 public class Takes {
 
-  private String employeeId;
-  private String courseId;
+  private String employee_id;
+  private String course_id;
   private Long completed;
-  private Long isPassed;
+  private Long is_passed;
 
 
   public String getEmployeeId() {
-    return employeeId;
+    return employee_id;
   }
 
   public void setEmployeeId(String employeeId) {
-    this.employeeId = employeeId;
+    this.employee_id = employeeId;
   }
 
 
   public String getCourseId() {
-    return courseId;
+    return course_id;
   }
 
   public void setCourseId(String courseId) {
-    this.courseId = courseId;
+    this.course_id = courseId;
   }
 
 
@@ -37,11 +37,11 @@ public class Takes {
 
 
   public long getIsPassed() {
-    return isPassed;
+    return is_passed;
   }
 
   public void setIsPassed(long isPassed) {
-    this.isPassed = isPassed;
+    this.is_passed = isPassed;
   }
 
 }

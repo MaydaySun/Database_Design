@@ -3,9 +3,148 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace指定你要实现的mapper接口全名 -->
-<mapper namespace="ManagerMapper">
-    <!--标签名是操作方式，id与接口中方法名一致 resultType指定返回值类型的全名-->
-    <select id="getManagerByUid" resultType="Manager">
-        select * from manager where employee_id = #{id}
+<mapper namespace="com.db_project.dao.ManagerMapper">
+    <select id="getManagerByUid" resultType="com.db_project.model.Manager">
+        select * from manager where employee_id = #{id};
+    </select>
+
+    <select id="getEmployeeByDeptId" resultType="com.db_project.model.Employee">
+        select * from employee where dept_id = #{dept_id}
+        and employee.id not in
+            (select employee_id from manager where manager.employee_id = #{dept_id});
+    </select>
+
+    <select id="getCoursesByDeptId" resultType="com.db_project.model.Course">
+        select course.course_id as course_id, title, content,
+               name as instructor_name, type, required, dept_name
+        from course, course_to_dept, instructor, department
+        where course.course_id = course_to_dept.course_id
+          and course_to_dept.dept_id = #{dept_id}
+          and course.instructor_id = instructor.employee_id
+          and course_to_dept.dept_id = department.dept_id;
+    </select>
+
+    <select id="hasTaken" resultType="int">
+        select count(*) from takes
+        where employee_id = #{id} and course_id = #{course_id};
+    </select>
+    <select id="getCourseByCid" resultType="com.db_project.model.Course">
+        select * from course where course_id = #{course};
+    </select>
+    <select id = "getDeptByCid" resultType="com.db_project.model.Department">
+        select department.* from department, course_to_dept
+        where department.dept_id = course_to_dept.dept_id
+          and course_to_dept.course_id = #{course_id}
+    </select>
+    <insert id="addCourseToEmployee">
+        insert into takes(employee_id, course_id, completed, is_passed)
+        values (#{id}, #{cid}, 0, null);
+    </insert>
+
+    <select id="getTestRecords">
+        select course.course_id, title, score
+        from course, test_record
+        where test_record.employee_id = #{id}
+          and course.course_id = test_record.course_id;
+    </select>
+
+    <select id="getUnpassedCompulsoryCourseCnt" resultType="int">
+        select count(*)
+        from takes, course_to_dept
+        where takes.employee_id = #{id}
+          and takes.course_id = course_to_dept.course_id
+          and course_to_dept.dept_id = #{deptId}
+          and course_to_dept.required = '必修'
+          and takes.is_passed in (null, 0);
+    </select>
+    <update id="moveToNewDept">
+        update employee set dept_id = #{dept_id} where id = #{id};
+    </update>
+    <insert id="addNewTakes">
+        insert into takes(employee_id, course_id, completed, is_passed)
+        values (#{id}, #{courseId}, 0 , null);
+    </insert>
+
+    <select id="getUnfinishedCompulsoryCourseID">
+        select course_to_dept.course_id from course_to_dept
+        where course_to_dept.dept_id = #{dept_id}
+          and course_to_dept.required = '必修'
+          and course_to_dept.course_id not in
+              (select takes.course_id
+              from takes
+              where takes.employee_id = #{id});
+    </select>
+
+    <select id="getPassedTakes">
+        select id, name, takes.course_id, title
+        from takes, employee, course, course_to_dept
+        where takes.course_id = course.course_id
+          and employee.id = takes.employee_id
+          and course.course_id = course_to_dept.course_id
+          and course_to_dept.dept_id = #{dept_id}
+          and is_passed = 1;
+    </select>
+    <select id="getEmployeeWithSituation">
+        select distinct id, name
+        from takes, employee, course
+        where takes.course_id = course.course_id
+          and employee.id = takes.employee_id
+          and course.course_id = #{course_id}
+          and is_passed = #{situatio};
+    </select>
+
+    <select id="getCourseScores">
+        select personal_score.*
+        from
+             (select id, name, max(score)
+             from employee, test_record, course_to_dept
+             where employee_id = id
+               and course_to_dept.course_id = test_record.course_id
+               and test_record.course_id = #{course_id}
+               and course_to_dept.dept_id = #{dept_id}
+             group by id, name)
+             as personal_score(id, name, score)
+    </select>
+
+    <select id = "getAllTakes">
+        select id, name, takes.course_id, title, is_passed
+        from takes, employee, course, course_to_dept
+        where takes.course_id = course.course_id
+          and employee.id = takes.employee_id
+          and course.course_id = course_to_dept.course_id
+          and course_to_dept.dept_id = #{dept_id};
+    </select>
+
+    <select id="getFailedTimes">
+        select employee_id, name,
+               (select count(*) from test_record, takes
+               where test_record.employee_id = employee.id
+                 and takes.employee_id = test_record.employee_id
+                 and takes.is_passed = 0) as count
+        from employee, test_record
+        where test_record.employee_id = employee.id
+          and employee.dept_id = #{dept_id};
+    </select>
+
+
+    <select id="getShiftableEmployee" resultType="com.db_project.model.Employee">
+        select employee.* from employee
+        where employee.dept_id = #{dept_id}
+          and employee.id  not in(
+            select distinct employee.id from employee, takes, course_to_dept
+            where employee_id = employee.id
+              and course_to_dept.course_id = takes.course_id
+              and employee.dept_id = #{dept_id}
+              and course_to_dept.dept_id = #{dept_id}
+              and takes.is_passed in(0, null));
+    </select>
+
+    <select id="getNewCourse">
+        select course.course_id, title from course, course_to_dept
+        where course.course_id = course_to_dept.dept_id
+          and course_to_dept.dept_id = #{dept_id}
+          and course_to_dept.required = '必修'
+          and course.course_id not in
+              (select takes.course_id from takes where employee_id = #{id})
     </select>
 </mapper>

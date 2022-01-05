@@ -1,6 +1,5 @@
 package com.db_project.main;
 
-import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.Option;
 
 public class Param {
@@ -13,8 +12,26 @@ public class Param {
     @Option(name="-name", usage = "员工名字")
     private String name;
 
+    @Option(name = "-phone", usage = "电话")
+    private String phone;
+
+    @Option(name = "-sex", usage = "性别")
+    private String sex;
+
+    @Option(name = "-city", usage = "城市")
+    private String city;
+
+    @Option(name = "-mail", usage = "email")
+    private String email;
+
+    @Option(name = "-age", usage = "年龄")
+    private int age;
+
     @Option(name="-cid", usage = "课程编号")
     private String cid;
+
+    @Option(name = "content")
+    private String courseContent;
 
     @Option(name="-title", usage = "课程名称")
     private String title;
@@ -36,6 +53,9 @@ public class Param {
 
     @Option(name="-content", usage = "日志内容")
     private String content;
+
+    @Option(name = "-count", usage = "次数")
+    private int count;
 
     public String getUid() throws ArgNotFoundException {
         if (uid == null)
@@ -102,4 +122,46 @@ public class Param {
             throw new ArgNotFoundException();
         return content;
     }
+
+    public String getCourseContent() throws ArgNotFoundException{
+        if (courseContent == null)
+            return "本课程暂无内容";
+        return courseContent;
+    }
+
+    //nullable part
+
+    public String getPhone(){
+        return phone;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public String getCity(){
+        return city;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+
+    public String getNullableName(){
+        return this.name;
+    }
+
+    public int getAge(){
+        return age;
+    }
+
+    public String getNullableDept(){
+        return did;
+    }
+
+    public int getCount(){
+        return count;
+    }
+
+
 }

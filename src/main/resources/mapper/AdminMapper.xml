@@ -3,25 +3,33 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace指定你要实现的mapper接口全名 -->
-<mapper namespace="AdminMapper">
+<mapper namespace="com.db_project.dao.AdminMapper">
     <!--标签名是操作方式，id与接口中方法名一致 resultType指定返回值类型的全名-->
-    <select id="getEmployee" resultType="Employee">
-       select * from employee where id = #{id};
+
+    <select id="getEmployee" resultType="com.db_project.model.Employee">
+        select employee.* from employee where employee.id = #{id};
+    </select>
+    <select id="getDept" resultType="com.db_project.model.Department">
+        select * from department where dept_id = #{dept_id}
     </select>
 
+
     <update id="updateEmployee">
-        update employee set name = #{name} where id = #{id};
+        update employee set name = #{name}, gender = #{gender}, age = #{age}, city = #{city},
+                            phone_number = #{phone_number}, email = #{email}, dept_id = #{dept_id}
+        where id = #{id};
     </update>
 
     <insert id="addEmployee">
-       insert into employee(id, name, dept_id) values (#{id}, #{name}, #{did});
+       insert into employee(id, name, dept_id, age, gender, email, city, phone_number)
+       values (#{id}, #{name}, #{did}, #{age}, #{sex}, #{email}, #{city}, #{phone});
     </insert>
 
     <delete id="deleteEmployee">
         delete from employee where id = #{id};
     </delete>
 
-    <select id="getCourse" resultType="Course">
+    <select id="getCourse" resultType="com.db_project.model.Course">
         select * from course where course_id = #{cid};
     </select>
 
@@ -30,7 +38,7 @@
     </update>
 
     <insert id="addCourse">
-        insert into course(course_id, title, instructor_id) values (#{cid}, #{title}, #{iid})
+        insert into course(course_id, title, instructor_id, content) values (#{cid}, #{title}, #{iid})
     </insert>
 
     <delete id="deleteCourse">

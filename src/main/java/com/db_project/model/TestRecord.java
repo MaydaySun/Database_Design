@@ -3,36 +3,36 @@ package com.db_project.model;
 
 public class TestRecord {
 
-  private Long recordId;
-  private String courseId;
-  private String employeeId;
+  private Long record_id;
+  private String course_id;
+  private String employee_id;
   private Long score;
 
 
   public long getRecordId() {
-    return recordId;
+    return record_id;
   }
 
   public void setRecordId(long recordId) {
-    this.recordId = recordId;
+    this.record_id = recordId;
   }
 
 
   public String getCourseId() {
-    return courseId;
+    return course_id;
   }
 
   public void setCourseId(String courseId) {
-    this.courseId = courseId;
+    this.course_id = courseId;
   }
 
 
   public String getEmployeeId() {
-    return employeeId;
+    return employee_id;
   }
 
   public void setEmployeeId(String employeeId) {
-    this.employeeId = employeeId;
+    this.employee_id = employeeId;
   }
 
 

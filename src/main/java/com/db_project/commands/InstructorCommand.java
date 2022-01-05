@@ -7,7 +7,7 @@ import com.db_project.main.Param;
 import com.db_project.model.Instructor;
 import com.db_project.model.Takes;
 import com.db_project.utils.MybatisUtils;
-import com.db_project.utils.Tool;
+import com.db_project.utils.PrintingTool;
 import org.apache.ibatis.session.SqlSession;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
@@ -39,7 +39,7 @@ public class InstructorCommand {
                         sqlSession.commit();
                         sqlSession.close();
                         for (Takes takes : students) {
-                            System.out.println(Tool.toString(takes));
+                            System.out.println(PrintingTool.toString(takes));
                         }
                     }
                         //TODO get all takes by instructor.employee_id
@@ -47,7 +47,7 @@ public class InstructorCommand {
                     case "addGrade":{
                         String cid = param.getCid();
                         String id = param.getUid();
-                        Long score = Long.parseLong(param.getScore());
+                        long score = Long.parseLong(param.getScore());
                         instructorMapper.setCompleted(cid, id);
                         instructorMapper.addTestRecord(cid, id, score);
                         if (score >= 60){

@@ -7,12 +7,11 @@ public class Employee {
   private String name;
   private String gender;
   private Long age;
-  private java.sql.Timestamp dateEmployed;
+  private java.sql.Timestamp date_employed;
   private String city;
-  private String phoneNumber;
+  private String phone_number;
   private String email;
-  private String deptId;
-
+  private String dept_id;
 
   public String getId() {
     return id;
@@ -51,11 +50,11 @@ public class Employee {
 
 
   public java.sql.Timestamp getDateEmployed() {
-    return dateEmployed;
+    return date_employed;
   }
 
   public void setDateEmployed(java.sql.Timestamp dateEmployed) {
-    this.dateEmployed = dateEmployed;
+    this.date_employed = dateEmployed;
   }
 
 
@@ -69,11 +68,11 @@ public class Employee {
 
 
   public String getPhoneNumber() {
-    return phoneNumber;
+    return phone_number;
   }
 
   public void setPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
+    this.phone_number = phoneNumber;
   }
 
 
@@ -87,11 +86,12 @@ public class Employee {
 
 
   public String getDeptId() {
-    return deptId;
+    return dept_id;
   }
 
   public void setDeptId(String deptId) {
-    this.deptId = deptId;
+    this.dept_id = deptId;
   }
+
 
 }

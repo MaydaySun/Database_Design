@@ -3,25 +3,25 @@ package com.db_project.model;
 
 public class Department {
 
-  private String deptId;
-  private String deptName;
+  private String dept_id;
+  private String dept_name;
 
 
   public String getDeptId() {
-    return deptId;
+    return dept_id;
   }
 
   public void setDeptId(String deptId) {
-    this.deptId = deptId;
+    this.dept_id = deptId;
   }
 
 
   public String getDeptName() {
-    return deptName;
+    return dept_name;
   }
 
   public void setDeptName(String deptName) {
-    this.deptName = deptName;
+    this.dept_name = deptName;
   }
 
 }

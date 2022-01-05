@@ -9,6 +9,9 @@ public class Course {
   private String content;
   private String instructorId;
 
+  private CourseToDept courseToDept;
+  private Instructor instructor;
+
 
   public String getCourseId() {
     return courseId;
@@ -52,6 +55,18 @@ public class Course {
 
   public void setInstructorId(String instructorId) {
     this.instructorId = instructorId;
+  }
+
+  public CourseToDept getCourseToDept(){
+    return this.courseToDept;
+  }
+
+  public void setCourseToDept(CourseToDept courseToDept){
+    this.courseToDept = courseToDept;
+  }
+
+  public Instructor getInstructor(){
+    return this.instructor;
   }
 
 }
