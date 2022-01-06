@@ -159,7 +159,7 @@ create trigger add_record_trigger after insert on test_record
             where takes.course_id = new.course_id and takes.employee_id = new.employee_id;
         else
             update takes set takes.is_passed = 0
-            where takes.course_id = new.course_id and takes.employee_id = new.employee_id;
+            where takes.course_id = new.course_id and takes.employee_id = new.employee_id and takes.is_passed is null;
         end if;
     end $
 DELIMITER ;

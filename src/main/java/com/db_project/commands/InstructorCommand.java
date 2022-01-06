@@ -61,14 +61,7 @@ public class InstructorCommand {
                         long score = Long.parseLong(param.getScore());
                         Course course = instructorMapper.getCourse(cid);// 确保course是自己任教的
                         Takes takes = instructorMapper.getStudent(id, cid);// 确保学生选了这门课
-                        // instructorMapper.setCompleted(cid, id); TODO 如果trigger有效，这里的注释就可以删除
                         instructorMapper.addTestRecord(cid, id, score);
-                        // if (score >= 60){
-                        //     instructorMapper.setPassed(id, cid);
-                        // }
-                        // else {
-                        //     instructorMapper.setFailed(id, cid);
-                        // }
                         logMapper.addLog(instructor.getEmployeeId(), "add grade " + cid + " "
                                 + id + " " + score);
                         sqlSession.commit();
