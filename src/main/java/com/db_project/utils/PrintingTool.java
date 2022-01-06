@@ -90,7 +90,7 @@ public class PrintingTool {
     }
 
     public static String toString(Log log){
-        return log.getLogId() + ", " + log.getUsername() + ", " + log.getContent() + ", "
+        return log.getLogId() + ", " + log.getEmployee_id() + ", " + log.getContent() + ", "
                 + log.getTime();
     }
 

@@ -10,9 +10,12 @@
         select * from instructor where employee_id = #{iid};
     </select>
 
-    <select id="getStudents" resultType="Takes">
-        select takes.* from takes, course where course.instructor_id = #{iid}
-                                        and takes.course_id = course.course_id;
+    <select id="getStudents" resultType="java.util.HashMap">
+        select takes.course_id, course.title, employee_id, employee.name
+        from takes, course, employee
+        where course.instructor_id = #{iid}
+          and takes.course_id = course.course_id
+          and id = takes.employee_id;
     </select>
 
     <update id="setCompleted">

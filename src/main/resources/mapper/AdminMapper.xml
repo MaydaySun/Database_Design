@@ -34,11 +34,11 @@
     </select>
 
     <update id="updateCourse">
-        update course set title = #{title} where title = #{title}
+        update course set title = #{title} where course_id = #{cid}
     </update>
 
     <insert id="addCourse">
-        insert into course(course_id, title, instructor_id) values (#{cid}, #{title}, #{iid})
+        insert into course(course_id, title, instructor_id, type) values (#{cid}, #{title}, #{iid}, #{type})
     </insert>
 
     <delete id="deleteCourse">
@@ -49,7 +49,7 @@
         select * from test_record where employee_id = #{id};
     </select>
 
-    <select id="getLog">
+    <select id="getLog" resultType="com.db_project.model.Log">
         select * from log where log_id = #{lid};
     </select>
 

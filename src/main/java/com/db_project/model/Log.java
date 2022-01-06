@@ -4,7 +4,7 @@ package com.db_project.model;
 public class Log {
 
   private Long log_id;
-  private String username;
+  private String employee_id;
   private String content;
   private java.sql.Timestamp time;
 
@@ -18,14 +18,13 @@ public class Log {
   }
 
 
-  public String getUsername() {
-    return username;
+  public String getEmployee_id(){
+    return this.employee_id;
   }
 
-  public void setUsername(String username) {
-    this.username = username;
+  public void setEmployee_id(String employee_id) {
+    this.employee_id = employee_id;
   }
-
 
   public String getContent() {
     return content;

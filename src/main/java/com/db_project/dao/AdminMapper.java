@@ -31,8 +31,10 @@ public interface AdminMapper {
     int deleteEmployee(@Param("id")String id) throws SQLException;
     public Course getCourse(@Param("cid")String cid) throws SQLException;
     public int updateCourse(@Param("cid")String cid, @Param("title")String title) throws SQLException;
-    public int addCourse(@Param("cid")String cid, @Param("title")String title,
-                           @Param("iid")String iid) throws SQLException;
+    public int addCourse(@Param("cid")String cid,
+                         @Param("title")String title,
+                         @Param("iid")String iid,
+                         @Param("type")String type) throws SQLException;
     public int deleteCourse(@Param("cid")String cid) throws SQLException;
     public List<TestRecord> getTestRecords(@Param("id")String id) throws SQLException;
     public Log getLog(@Param("lid")Long lid) throws SQLException;

@@ -24,7 +24,13 @@ public class AdminCommand {
         while (scanner.hasNextLine()){
             String[] args = scanner.nextLine().split(" ");
             CmdLineParser parser = new CmdLineParser(param);
-            parser.parseArgument(Arrays.copyOfRange(args, 1, args.length));
+            try {
+                parser.parseArgument(Arrays.copyOfRange(args, 1, args.length));
+            }catch (CmdLineException e){
+                System.out.println("invalid args");
+                e.printStackTrace();
+                continue;
+            }
 
             SqlSession sqlSession = MybatisUtils.getSqlSession();
             AdminMapper adminMapper = sqlSession.getMapper(AdminMapper.class);
@@ -132,7 +138,8 @@ public class AdminCommand {
                         String cid = param.getCid();
                         String title = param.getTitle();
                         String iid = param.getIid();
-                        adminMapper.addCourse(cid, title, iid);
+                        String type = param.getType();
+                        adminMapper.addCourse(cid, title, iid, type);
                         adminMapper.addLog("add course " + cid + " " + title);
                         sqlSession.commit();
                         sqlSession.close();

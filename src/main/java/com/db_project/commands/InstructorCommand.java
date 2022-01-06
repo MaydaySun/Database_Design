@@ -14,21 +14,32 @@ import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class InstructorCommand {
-    private Instructor instructor;
+    private final Instructor instructor;
 
     public InstructorCommand(Instructor instructor){this.instructor = instructor;}
 
     public void listen() throws CmdLineException {
+
+        System.out.println( instructor.getName() + "老师 你好");
         Scanner scanner = new Scanner(System.in);
         Param param = new Param();
         while (scanner.hasNextLine()){
             String[] args = scanner.nextLine().split(" ");
             CmdLineParser parser = new CmdLineParser(param);
-            parser.parseArgument(args);
+            try {
+                parser.parseArgument(Arrays.copyOfRange( args, 1 , args.length ));
+            }
+            catch (CmdLineException e){
+                System.out.println("invalid arg format");
+                e.printStackTrace();
+            }
+
             SqlSession sqlSession = MybatisUtils.getSqlSession();
             InstructorMapper instructorMapper = sqlSession.getMapper(InstructorMapper.class);
             LogMapper logMapper = sqlSession.getMapper(LogMapper.class);
@@ -36,14 +47,12 @@ public class InstructorCommand {
                 switch (args[0]){
                     case "getStudents":{
                         String iid = instructor.getEmployeeId();
-                        List<Takes> students = instructorMapper.getStudents(iid);
+                        List<Map<String, Object>> students = instructorMapper.getStudents(iid);
                         sqlSession.commit();
                         sqlSession.close();
-                        for (Takes takes : students) {
-                            System.out.println(PrintingTool.toString(takes));
-                        }
+                        PrintingTool.printInTable(students);
                     }
-                        //TODO get all takes by instructor.employee_id
+                        //TODO get all takes by instructor.employee_id,
                         break;
                     case "addGrade":{
                         String cid = param.getCid();
