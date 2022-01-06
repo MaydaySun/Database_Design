@@ -39,4 +39,8 @@ public interface AdminMapper {
     public List<TestRecord> getTestRecords(@Param("id")String id) throws SQLException;
     public Log getLog(@Param("lid")Long lid) throws SQLException;
     public int addLog(@Param("content")String content) throws SQLException;
+    public int addInstructor(@Param("id")String id, @Param("name")String name) throws SQLException;
+    public int deleteInstructor(@Param("iid")String iid) throws SQLException;
+    public int addManager(@Param("id")String id, @Param("name")String name, @Param("did")String did) throws SQLException;
+    public int deleteManager(@Param("iid")String iid) throws SQLException;
 }

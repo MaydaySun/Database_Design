@@ -10,6 +10,14 @@
         select * from instructor where employee_id = #{iid};
     </select>
 
+    <select id="getCourse" resultType="Course">
+        select * from course where course_id = #{cid};
+    </select>
+
+    <select id="getStudent" resultType="Takes">
+        select * from takes where employee_id = #{id} and course_id = #{cid};
+    </select>
+
     <select id="getStudents" resultType="java.util.HashMap">
         select takes.course_id, course.title, employee_id, employee.name
         from takes, course, employee
@@ -24,6 +32,10 @@
 
     <update id="setPassed">
         update takes set is_passed = 1 where employee_id = #{id} and course_id = #{cid};
+    </update>
+
+    <update id="setFailed">
+        update takes set is_passed = 0 where employee_id = #{id} and course_id = #{cid};
     </update>
 
     <insert id="addTestRecord">

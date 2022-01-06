@@ -104,7 +104,7 @@ ALTER TABLE test_record
 create table log
 (
     log_id          bigint          auto_increment,
-    employee_id     varchar(10)     default 'admin', -- 操作者的id，若不是员工操作，默认值为admin操作
+    employee_id     varchar(11)     default 'admin', -- 操作者的id，若不是员工操作，默认值为admin操作
     content         varchar(100)    not null,
     time            TIMESTAMP       default current_timestamp, -- 日志时间戳
     primary key (log_id)
@@ -156,6 +156,9 @@ create trigger add_record_trigger after insert on test_record
         where takes.course_id = new.course_id and takes.employee_id = new.employee_id;
         if (new.score >= 60) then
             update takes set takes.is_passed = 1
+            where takes.course_id = new.course_id and takes.employee_id = new.employee_id;
+        else
+            update takes set takes.is_passed = 0
             where takes.course_id = new.course_id and takes.employee_id = new.employee_id;
         end if;
     end $

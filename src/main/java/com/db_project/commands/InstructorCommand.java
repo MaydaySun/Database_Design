@@ -4,6 +4,7 @@ import com.db_project.dao.InstructorMapper;
 import com.db_project.dao.LogMapper;
 import com.db_project.main.ArgNotFoundException;
 import com.db_project.main.Param;
+import com.db_project.model.Course;
 import com.db_project.model.Employee;
 import com.db_project.model.Instructor;
 import com.db_project.model.Takes;
@@ -58,10 +59,15 @@ public class InstructorCommand {
                         String cid = param.getCid();
                         String id = param.getUid();
                         long score = Long.parseLong(param.getScore());
+                        Course course = instructorMapper.getCourse(cid);// 确保course是自己任教的
+                        Takes takes = instructorMapper.getStudent(id, cid);// 确保学生选了这门课
                         // instructorMapper.setCompleted(cid, id); TODO 如果trigger有效，这里的注释就可以删除
                         instructorMapper.addTestRecord(cid, id, score);
                         // if (score >= 60){
                         //     instructorMapper.setPassed(id, cid);
+                        // }
+                        // else {
+                        //     instructorMapper.setFailed(id, cid);
                         // }
                         logMapper.addLog(instructor.getEmployeeId(), "add grade " + cid + " "
                                 + id + " " + score);

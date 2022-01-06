@@ -191,6 +191,39 @@ public class AdminCommand {
                     }
                         //TODO 添加log（参数：content）
                         break;
+                    case  "addInstructor":{
+                        String id = param.getUid();
+                        Employee employee = adminMapper.getEmployee(id);
+                        String name = employee.getName();
+                        adminMapper.addInstructor(id, name);
+                        sqlSession.commit();
+                        sqlSession.close();
+                    }
+                        break;
+                    case  "deleteInstructor":{
+                        String id = param.getUid();
+                        adminMapper.deleteInstructor(id);
+                        sqlSession.commit();
+                        sqlSession.close();
+                    }
+                        break;
+                    case  "addManager":{
+                        String id = param.getUid();
+                        String did = param.getDid();
+                        Employee employee = adminMapper.getEmployee(id);
+                        String name = employee.getName();
+                        adminMapper.addManager(id, name, did);
+                        sqlSession.commit();
+                        sqlSession.close();
+                    }
+                        break;
+                    case  "deleteManager":{
+                        String id = param.getUid();
+                        adminMapper.deleteManager(id);
+                        sqlSession.commit();
+                        sqlSession.close();
+                    }
+                        break;
                     case "logout":
                         sqlSession.close();
                         return;// 登出，返回到Main.console()中等待下一次登录

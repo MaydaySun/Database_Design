@@ -57,4 +57,19 @@
         insert into log(content) values(#{content});
     </insert>
 
+    <insert id="addInstructor">
+        insert into instructor(employee_id, name) values (#{id}, #{name})
+    </insert>
+
+    <delete id="deleteInstructor">
+        delete from instructor where employee_id = #{id};
+    </delete>
+
+    <insert id="addManager">
+        insert into manager(employee_id, name, dept_id) values (#{id}, #{name}, #{did})
+    </insert>
+
+    <delete id="deleteManager">
+        delete from manager where employee_id = #{id};
+    </delete>
 </mapper>
