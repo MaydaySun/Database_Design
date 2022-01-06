@@ -91,7 +91,8 @@ public class InstructorCommand {
                         if ("必修".equals(required)){
                             List<Employee> employees = instructorMapper.getEmployeesByDid(did);
                             for (Employee employee : employees) {
-                                instructorMapper.addTakes(employee.getId(), cid);
+                                if (!instructor.getEmployeeId().equals(employee.getId()))// 保证不是自己上的课
+                                    instructorMapper.addTakes(employee.getId(), cid);
                             }// 如果是必修关联操作，为该部门所有员工自动分配课程
                         }
                         logMapper.addLog(instructor.getEmployeeId(), "associate course and department "
