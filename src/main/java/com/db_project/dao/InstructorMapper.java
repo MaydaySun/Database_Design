@@ -1,5 +1,6 @@
 package com.db_project.dao;
 
+import com.db_project.model.Employee;
 import com.db_project.model.Instructor;
 import com.db_project.model.Takes;
 import org.apache.ibatis.annotations.Param;
@@ -14,4 +15,6 @@ public interface InstructorMapper {
     public int setPassed(@Param("id")String id, @Param("cid")String cid) throws SQLException;
     public int addTestRecord( @Param("cid")String cid, @Param("id")String id, @Param("score")Long score) throws SQLException;
     public int associateCourse(@Param("cid")String cid, @Param("did")String did, @Param("required")String required) throws SQLException;
+    public List<Employee> getEmployeesByDid(@Param("did")String did) throws SQLException;
+    public int addTakes(@Param("id")String id, @Param("cid")String cid) throws SQLException;
 }

@@ -31,4 +31,12 @@
     <insert id="associateCourse">
         insert into course_to_dept values (#{cid}, #{did}, #{required})
     </insert>
+
+    <select id="getEmployeesByDid" resultType="Employee">
+            select * from employee where dept_id = #{did}
+    </select>
+
+    <insert id="addTakes">
+        insert into takes(employee_id, course_id) values(#{id}, #{cid})
+    </insert>
 </mapper>

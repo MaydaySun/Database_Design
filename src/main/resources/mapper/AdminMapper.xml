@@ -38,7 +38,7 @@
     </update>
 
     <insert id="addCourse">
-        insert into course(course_id, title, instructor_id, content) values (#{cid}, #{title}, #{iid})
+        insert into course(course_id, title, instructor_id) values (#{cid}, #{title}, #{iid})
     </insert>
 
     <delete id="deleteCourse">

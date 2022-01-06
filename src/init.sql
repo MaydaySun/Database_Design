@@ -116,10 +116,10 @@ create table takes
 (
     employee_id     varchar(11)     not null,
     course_id       varchar(7)      not null,
-    completed       int             default 0   check ( completed in (0, 1)),-- 结课状态，默认为未结课。
+    completed       int             default 0       check ( completed in (0, 1)),-- 结课状态，默认为未结课。
     -- 结课状态针对的是(employee_id, course_id)即一个员工是否学习完了该课程，而不是该课程是否已经结束并注销
     -- 直到管理员将此课程从course表中移除，代表该课程已注销
-    is_passed       int             check ( is_passed in  (null, 0, 1)), -- 培训的通过状态
+    is_passed       int             default null    check ( is_passed in  (null, 0, 1)), -- 培训的通过状态
     primary key (employee_id, course_id),
     foreign key (employee_id) references employee (id)
         on delete cascade
@@ -147,6 +147,19 @@ create table course_to_dept -- 课程与部门的关联表
 ALTER TABLE course_to_dept
     CONVERT TO CHARACTER SET utf8;
 
+drop trigger if exists add_record_trigger;
+DELIMITER $
+create trigger add_record_trigger after insert on test_record
+    for each row
+    begin
+        update takes set takes.completed = 1
+        where takes.course_id = new.course_id and takes.employee_id = new.employee_id;
+        if (new.score >= 60) then
+            update takes set takes.is_passed = 1
+            where takes.course_id = new.course_id and takes.employee_id = new.employee_id;
+        end if;
+    end $
+DELIMITER ;
 
 -- 向department表插入初始信息
 insert into department
