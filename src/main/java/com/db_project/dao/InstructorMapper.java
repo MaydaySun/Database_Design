@@ -12,7 +12,8 @@ import java.util.Map;
 
 public interface InstructorMapper {
     public Instructor getInstructor(@Param("iid")String iid) throws SQLException;
-    public Course getCourse(@Param("cid")String cid) throws SQLException;
+    public Course getCourse(@Param("cid")String cid,
+                            @Param("iid")String iid) throws SQLException;
     public Takes getStudent(@Param("id")String id, @Param("cid")String cid) throws SQLException;
     List<Map<String, Object>> getStudents(@Param("iid")String iid) throws SQLException;
     public int setCompleted(@Param("id")String id, @Param("cid")String cid) throws SQLException;

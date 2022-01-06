@@ -224,5 +224,7 @@ insert into takes -- 根据必修课程初始化takes表
 values('10231106002', '35155', 0, null);
 insert into takes
 values('10231106003', '35142', 0, null);
+insert into takes
+values('10231106005', '35142', 0, null);
 
 

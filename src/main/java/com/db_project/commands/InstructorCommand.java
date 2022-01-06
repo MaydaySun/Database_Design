@@ -59,21 +59,33 @@ public class InstructorCommand {
                         String cid = param.getCid();
                         String id = param.getUid();
                         long score = Long.parseLong(param.getScore());
-                        Course course = instructorMapper.getCourse(cid);// 确保course是自己任教的
+                        Course course = instructorMapper.getCourse(cid, instructor.getEmployeeId());// 确保course是自己任教的
                         Takes takes = instructorMapper.getStudent(id, cid);// 确保学生选了这门课
+
+                        if( course == null || takes == null ){
+                            System.out.println("这不是你的课或者学生未选择这门课");
+                            continue;
+                        }
+
                         instructorMapper.addTestRecord(cid, id, score);
                         logMapper.addLog(instructor.getEmployeeId(), "add grade " + cid + " "
                                 + id + " " + score);
                         sqlSession.commit();
                         sqlSession.close();
                         System.out.println("Finished!");
+                        break;
                     }
                         //TODO add new test record for a student in some course by cid, id & score
                         // parse score from String to Long first
-                        break;
                     case "associate":{
                         String cid = param.getCid();
                         String did = param.getDid();
+                        Course course = instructorMapper.getCourse(cid, instructor.getEmployeeId());
+                        if( course == null ){
+                            System.out.println("这不是你的课");
+                            continue;
+                        }
+
                         String required = "1".equals(param.getRequired()) ? "必修" : "选修";
                         instructorMapper.associateCourse(cid, did, required);
                         if ("必修".equals(required)){
@@ -88,9 +100,12 @@ public class InstructorCommand {
                         sqlSession.commit();
                         sqlSession.close();
                         System.out.println("Finished!");
+                        break;
                     }
                         //TODO associate course with department, meaning visible to the department
                     case "logout":
+                        sqlSession.close();
+                        System.out.println("退出了");
                         return;// 登出，返回到Main.console()中等待下一次登录
                 }
             }

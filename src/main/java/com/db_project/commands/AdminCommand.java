@@ -185,9 +185,9 @@ public class AdminCommand {
                     case "addLog":{
                         String content = param.getContent();
                         adminMapper.addLog(content);
-                        System.out.println("Finished!");
                         sqlSession.commit();
                         sqlSession.close();
+                        System.out.println("Finished!");
                     }
                         //TODO 添加log（参数：content）
                         break;
@@ -198,6 +198,8 @@ public class AdminCommand {
                         adminMapper.addInstructor(id, name);
                         sqlSession.commit();
                         sqlSession.close();
+                        System.out.println("你将这位员工设成了教师");
+                        PrintingTool.wrapToTable(employee);
                     }
                         break;
                     case  "deleteInstructor":{
